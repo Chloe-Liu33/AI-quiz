@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Deep Learning Knowledge Assessment&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--primary-color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--correct-bg: #d4edda;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--correct-border: #c3e6cb;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--correct-text: #155724;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--wrong-bg: #f8d7da;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--wrong-border: #f5c6cb;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--wrong-text: #721c24;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--card-shadow: 0 4px 15px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 40px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 850px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 50px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--primary-color);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.question-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: var(--card-shadow);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-left: 5px solid #bdc3c7;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.question-text {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.options-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.option-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #e9ecef;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.option-btn:hover:not(.disabled) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f1f3f5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #ced4da;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(5px);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.option-letter {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-right: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #7f8c8d;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 状态样式 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.option-btn.correct {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--correct-bg) !important;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: var(--correct-border) !important;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--correct-text) !important;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.option-btn.wrong {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--wrong-bg) !important;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: var(--wrong-border) !important;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--wrong-text) !important;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.option-btn.disabled {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 解析区域 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.explanation-panel {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #fdfdfe;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 2px dashed #dee2e6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: fadeIn 0.5s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.explanation-panel h4 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #495057;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 2px solid #eee;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.exp-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.exp-key {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 80px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes fadeIn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>from { opacity: 0; transform: translateY(10px); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>to { opacity: 1; transform: translateY(0); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;DL &amp; ML Research Fundamentals&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Interactive self-assessment for PhD candidates and researchers.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="quiz-root"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const quizData = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 1,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "1. What is the key difference between supervised learning and unsupervised learning?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Supervised learning optimizes loss functions, whereas unsupervised learning does not",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Supervised learning learns from labels, whereas unsupervised learning does not",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Supervised learning can scale to extremely large data size, whereas unsupervised learning cannot",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Supervised learning uses deep learning, whereas unsupervised learning does."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "B",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Incorrect. Many unsupervised methods (like K-means or Autoencoders) minimize objective functions.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Correct. Labels are the definitive requirement for supervised learning.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Incorrect. Unsupervised learning often scales better as it doesn't require human annotation.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect. Deep learning techniques apply to both types of learning."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 2,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "2. Which of the following statements about the K-means algorithm is incorrect?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "K-means algorithm has to know the number of clusters k in advance",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "K-means algorithm is for unsupervised learning problems",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "K-means algorithm will find globally optimal clusters in the sense of globally minimizing the sum of point-to-center distances",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "K-means algorithm provably makes progress at each iteration, until it converges."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "C",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "True statement. 'k' is a pre-defined hyperparameter.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "True statement. It is a fundamental clustering algorithm.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Incorrect Statement (Correct Choice). K-means is sensitive to initialization and only guarantees a local minimum.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "True statement. The objective function (Inertia) decreases or stays flat at every step."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 3,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "3. Which of the following statements about AI is correct?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "AI is about developing machine learning techniques to solve intelligence problems",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "AI is about developing neural networks and deep learning techniques to solve intelligence problems",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "AI is about developing computing methods to achieve human-level capabilities and rational behaviors",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "AI is about developing techniques to make computers behave exactly as humans."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "C",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Incorrect. ML is only a subset of the broader AI field.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Incorrect. DL is a subset of ML, which is a subset of AI.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Correct. AI's core goal is creating systems that act and think rationally to solve complex tasks.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect. AI focuses on rational efficiency, not necessarily emulating human errors or biological constraints."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 4,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "4. Which of the following is incorrect about supervised learning?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Two major problems of supervised learning are classification and regression",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "The success of deep learning begins from supervised learning",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Many supervised learning algorithms are based on minimizing loss functions",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Supervised learning algorithms interact with data samples to identify high-rewarding ones and discard low-rewarding ones, ultimately maximizes overall rewards."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "D",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "True. These are the two primary pillars of SL.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "True. Benchmarks like ImageNet (SL) catalyzed the DL revolution.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "True. Loss minimization (Gradient Descent) is the standard learning paradigm.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect Statement (Correct Choice). This describes Reinforcement Learning (RL), not SL."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 5,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "5. Which of the following about relations between linear classifiers and neural networks (NN) is correct?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "They are not related",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Linear classifiers are a special case of NN, with one hidden layer and indicator function as the activation function",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Linear classifiers are a special case of NN, with no hidden layer and indicator function as the activation function",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Linear classifiers are a special case of NN, with no hidden layer and a continuous activation function"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "C",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Incorrect. They share the same fundamental linear algebra basis.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Incorrect. Adding a hidden layer introduces non-linearity (MLP).",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Correct. A single-layer Perceptron with a step function is the textbook definition of a linear classifier.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect. Continuous activations (like Sigmoid) turn it into Logistic Regression, often seen as a specific type of linear model."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 6,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "6. Which of the following statement about neural networks' activation functions is incorrect?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "They are used to introduce non-linearity to the model",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Popular choices include ReLU and sigmoid function",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "They need to be differentiable everywhere",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Choice of activation functions is important to the performance of the network"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "C",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "True. Non-linearity allows NNs to be universal function approximators.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "True. These are standard choices in modern DL.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Incorrect Statement (Correct Choice). ReLU is not differentiable at x=0, yet it is extremely successful in practice.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "True. Activation choice affects gradient flow and training speed."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 7,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "7. Which of the following function can be provably minimized by the gradient descent method?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Continuous functions",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Convex functions",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Concave functions",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Quadratic functions"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "B",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Incorrect. Continuous non-convex functions can trap GD in poor local minima.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Correct. In convex optimization, GD is guaranteed to find the global minimum.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Incorrect. GD would walk away from the peak of a concave function.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect. Only positive-definite (convex) quadratic functions are guaranteed."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 8,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "8. Which of the following can be computed during the backpropagation algorithm?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Gradient of the neural network",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Predicted value of the neural network",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Both the gradient and the predicted value of the neural network",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "The optimal weights of the neural network"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "A",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Correct. Backprop is specifically the efficient computation of gradients using the Chain Rule.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Incorrect. Predictions happen during the Forward Pass.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Incorrect. Forward and Backward passes are distinct stages.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect. Backprop only provides gradients; the Optimizer (e.g., SGD) updates weights toward the optimal."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 9,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "9. Which of the following statement about the depth of a neural network (i.e., the number of hidden layers) is correct?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "The deeper the network is, the better performance we will obtain",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "The shallower the network is, the better performance we will obtain",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "The only issue for training a very deep neural network is the large computational cost",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "The best choice for the depth of a neural network depends on the amount of available training data and gradient calculation algorithm"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "D",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Incorrect. Over-depth causes vanishing gradients and overfitting.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Incorrect. Shallow networks often lack the capacity to learn complex features.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Incorrect. Optimization stability (gradients) is often a bigger hurdle than compute.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Correct. Model complexity must be balanced with data volume and optimization strategy."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 10,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "10. Which of the following is not a major research challenges in deep learning?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Optimizing loss function",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Designing neural networks' architecture",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Make predictions from learned neural networks",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "All of the above are very challenging"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "C",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Challenge. Researching optimizers (Adam, Lion, etc.) is a huge subfield.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Challenge. Architecture design (Transformers, GNNs) is the heart of DL progress.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Correct Choice. Inference is a deterministic forward pass; while engineering it for speed is hard, it is not a fundamental scientific challenge.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect, because C is not a research hurdle."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 11,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "11. Which of the following is a drawback of linear classifiers?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Lack of robustness",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Have limited expressiveness",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Difficult to learn the optimal classifier",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "None of the above is an issue for linear classifiers"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "B",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Incorrect. Linear models are often very robust due to their simplicity.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Correct. They cannot learn non-linear decision boundaries (e.g., the XOR problem).",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Incorrect. Most linear model optimization is convex and easily solved.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect, as 'B' is a significant limitation."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 12,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "12. Why is gradient descent commonly used in training neural networks?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "It guarantees finding the global minimum in all cases",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "It simplifies the network architecture",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "It provides an efficient iterative method to minimize the loss function",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "It avoids the need for activation functions"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "C",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Incorrect. It only guarantees local minima in non-convex DL landscapes.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Incorrect. It optimizes weights, not layer structures.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Correct. It is the most scalable way to update millions of weights using partial derivatives.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect. Activations are essential for the network to be non-linear."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: 13,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>q: "13. Which of the following problems might arise if the learning rate is set too high?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Slow convergence",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Overfitting",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "The loss may oscillate or diverge",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Underfitting"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: "C",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>A: "Incorrect. Slow convergence results from a learning rate that is too *low*.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>B: "Incorrect. Overfitting is related to capacity and regularization.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>C: "Correct. Overshooting the minimum leads to instability, oscillation, or exploding loss.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>D: "Incorrect. While it won't learn, 'Divergence' is the specific term for this failure mode."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderQuiz() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const root = document.getElementById('quiz-root');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>quizData.forEach((data, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const card = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>card.className = 'question-card';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>card.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="question-text"&gt;${data.q}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="options-container" id="opts-${data.id}"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="explanation-panel" id="exp-panel-${data.id}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4&gt;Option Explanations:&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="exp-content-${data.id}"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>root.appendChild(card);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const optContainer = document.getElementById(`opts-${data.id}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const expContent = document.getElementById(`exp-content-${data.id}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const expPanel = document.getElementById(`exp-panel-${data.id}`);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>Object.entries(data.options).forEach(([key, text]) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const btn = document.createElement('button');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>btn.className = 'option-btn';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>btn.innerHTML = `&lt;span class="option-letter"&gt;${key}.&lt;/span&gt; &lt;span&gt;${text}&lt;/span&gt;`;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>btn.onclick = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>handleAnswer(data.id, key, data.correct);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>optContainer.appendChild(btn);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Pre-fill explanation content</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const expItem = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expItem.className = 'exp-item';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expItem.innerHTML = `&lt;span class="exp-key"&gt;Option ${key}:&lt;/span&gt; ${data.explanations[key]}`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expContent.appendChild(expItem);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function handleAnswer(qId, selectedKey, correctKey) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const container = document.getElementById(`opts-${qId}`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const buttons = container.getElementsByClassName('option-btn');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const panel = document.getElementById(`exp-panel-${qId}`);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Array.from(buttons).forEach(btn =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.add('disabled');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const btnKey = btn.querySelector('.option-letter').innerText.replace('.', '');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (btnKey === correctKey) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>btn.classList.add('correct');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (btnKey === selectedKey) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>btn.classList.add('wrong');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>panel.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderQuiz();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
