@@ -3,143 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TA Session 5: Reinforcement Learning Q&A</title>
+    <title>TA Session 5: RL Multiple Choice Quiz</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; background-color: #f9f9f9;}
         h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        details { margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; background-color: #fcfcfc; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: background-color 0.3s ease; }
-        details[open] { background-color: #fff; border-color: #3498db; }
-        summary { font-weight: 600; font-size: 1.05em; cursor: pointer; color: #2980b9; outline: none; list-style-position: inside; }
+        .question-container { background-color: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; color: #2c3e50; }
+        .options-list { list-style-type: upper-alpha; margin-bottom: 15px; padding-left: 20px; }
+        .options-list li { margin-bottom: 8px; }
+        details { background-color: #f0f7fb; border-left: 4px solid #3498db; padding: 10px 15px; border-radius: 4px; transition: background-color 0.3s ease; }
+        summary { font-weight: 600; cursor: pointer; color: #2980b9; outline: none; }
         summary:hover { color: #1abc9c; }
-        ul { margin-top: 15px; padding-left: 20px; color: #444; }
-        li { margin-bottom: 8px; }
-        strong { color: #2c3e50; }
+        .answer-box { margin-top: 10px; color: #444; }
+        .correct-answer { font-weight: bold; color: #27ae60; margin-bottom: 5px; display: block;}
     </style>
 </head>
 <body>
 
-    <h1>Reinforcement Learning & MDP - Review Questions</h1>
-    <p>Click on any question below to reveal the answer and analysis.</p>
+    <h1>Reinforcement Learning & MDP - Multiple Choice Quiz</h1>
+    <p>Test your knowledge based on TA Session 5. Read the question, choose your answer, and click "Show Answer & Analysis" to check.</p>
 
-    <details>
-        <summary>Q1. What is the typical convergence rate of gradient descent on a smooth and strongly convex function?</summary>
-        <ul>
-            <li><strong>Answer:</strong> Linear O(ρ^t).</li>
-            <li><strong>Analysis:</strong> For a function that is both smooth and strongly convex, the gradient cannot be small unless it is already near the optimum, resulting in a linear convergence rate. By contrast, if a function is only convex, the convergence rate is sublinear O(1/t).</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">1. What is the typical convergence rate of gradient descent on a smooth and strongly convex function?</div>
+        <ol class="options-list">
+            <li>Sublinear O(1/t)</li>
+            <li>Linear O(ρ^t)</li>
+            <li>Faster Sublinear O(1/t²)</li>
+            <li>Quadratic O(ρ^2t)</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: B</span>
+                <strong>Analysis:</strong> For a function that is both smooth and strongly convex, gradient descent converges linearly. Sublinear O(1/t) applies to functions that are only convex.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q2. How is the "Markov Property" formally defined in the context of Reinforcement Learning?</summary>
-        <ul>
-            <li><strong>Answer:</strong> A state S_t is Markov if and only if P[S_{t+1}|S_t] = P[S_{t+1}|S_1,..,S_t].</li>
-            <li><strong>Analysis:</strong> The Markov Property dictates that "the future is independent of the past given the present". Because the state captures all relevant information from the history, it acts as a sufficient statistic of the future.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">2. According to the definition of a Markov State, a state S_t is considered Markov if and only if:</div>
+        <ol class="options-list">
+            <li>It contains the complete history of all past actions and observations.</li>
+            <li>The environment is fully deterministic.</li>
+            <li>The future is independent of the past given the present.</li>
+            <li>The agent knows the exact absolute location of all objects.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: C</span>
+                <strong>Analysis:</strong> The core of the Markov property is that P[S_{t+1}|S_t] = P[S_{t+1}|S_1,..,S_t]. Once the current state is known, the history may be thrown away because the state is a sufficient statistic of the future.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q3. What is the fundamental assumption about goals in Reinforcement Learning, known as the "Reward Hypothesis"?</summary>
-        <ul>
-            <li><strong>Answer:</strong> All goals can be described by the maximization of expected cumulative reward.</li>
-            <li><strong>Analysis:</strong> In the RL framework, the agent receives a scalar feedback signal called a reward. The agent's overarching job is to select actions to maximize the total future cumulative reward.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">3. What does the "Reward Hypothesis" state in Reinforcement Learning?</div>
+        <ol class="options-list">
+            <li>Rewards must always be immediate to be effective.</li>
+            <li>All goals can be described by the maximization of expected cumulative reward.</li>
+            <li>Agents must balance positive and negative rewards equally.</li>
+            <li>A reward is only given when a task is fully completed.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: B</span>
+                <strong>Analysis:</strong> The Reward Hypothesis posits that any goal-directed behavior can be formalized as the maximization of the sum of a scalar feedback signal (expected cumulative reward).
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q4. What is the difference between a Fully Observable Environment and a Partially Observable Environment (POMDP)?</summary>
-        <ul>
-            <li><strong>Answer:</strong> In full observability, the agent directly observes the environment state. In partial observability, the agent only indirectly observes the environment and must construct its own state representation.</li>
-            <li><strong>Analysis:</strong> In a fully observable MDP, the agent state equals the environment state. In a POMDP, the agent might use a complete history or a recurrent neural network to construct its state representation.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">4. In a Partially Observable Markov Decision Process (POMDP), the agent state is:</div>
+        <ol class="options-list">
+            <li>Exactly equal to the environment state.</li>
+            <li>Constructed by the agent (e.g., using complete history or RNNs) because the environment is indirectly observed.</li>
+            <li>Always fixed and cannot be updated.</li>
+            <li>Irrelevant to calculating the expected reward.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: B</span>
+                <strong>Analysis:</strong> In partial observability (like a poker playing agent only seeing public cards), the agent state ≠ environment state. The agent must construct its own state representation using history, beliefs, or neural networks.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q5. What are the three major components that might make up a Reinforcement Learning agent?</summary>
-        <ul>
-            <li><strong>Answer:</strong> A Policy, a Value Function, and a Model.</li>
-            <li><strong>Analysis:</strong> The policy is the agent's behavior function mapping states to actions. The value function evaluates how good a specific state or action is. The model is the agent's internal representation of the environment.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">5. Which of the following is NOT one of the major components typically found inside an RL Agent?</div>
+        <ol class="options-list">
+            <li>Policy</li>
+            <li>Value Function</li>
+            <li>Model</li>
+            <li>Supervised Labels</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: D</span>
+                <strong>Analysis:</strong> An RL agent may include a Policy (behavior function), a Value Function (how good a state/action is), and a Model (agent's representation of the environment). Supervised labels belong to Supervised Learning, not RL.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q6. How does Reinforcement Learning fundamentally differ from Planning?</summary>
-        <ul>
-            <li><strong>Answer:</strong> In RL, the environment is initially unknown, and the agent learns via interaction. In Planning, a perfect model of the environment is known, and the agent computes its policy internally.</li>
-            <li><strong>Analysis:</strong> Planning is akin to deliberation or search, where an agent can query an internal emulator. RL requires interactive trial-and-error gameplay.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">6. The fundamental difference between "Reinforcement Learning" and "Planning" is that in Planning:</div>
+        <ol class="options-list">
+            <li>The agent must learn directly from interactive game-play.</li>
+            <li>The rules of the game are completely unknown.</li>
+            <li>A perfect model of the environment is already known to the agent.</li>
+            <li>The agent focuses exclusively on exploration rather than exploitation.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: C</span>
+                <strong>Analysis:</strong> In Planning, a model is known, and the agent performs computations (deliberation, tree search) with its model without external interaction. In RL, the environment is initially unknown and requires interaction.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q7. Why must an agent balance Exploration and Exploitation?</summary>
-        <ul>
-            <li><strong>Answer:</strong> Exploration discovers more information about the environment, while exploitation leverages known information to maximize immediate rewards.</li>
-            <li><strong>Analysis:</strong> Over-exploiting might leave the agent stuck in a suboptimal strategy. Both are necessary to find the best long-term strategy.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">7. In the context of RL trade-offs, trying a new restaurant instead of going to your favorite place is an example of:</div>
+        <ol class="options-list">
+            <li>Exploitation</li>
+            <li>Exploration</li>
+            <li>Temporal Difference Learning</li>
+            <li>Dynamic Programming</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: B</span>
+                <strong>Analysis:</strong> Exploration finds more information about the environment by trying new actions, whereas exploitation exploits known information to maximize immediate reward (going to the known favorite).
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q8. How does a Value-Based RL agent differ from a Policy-Based RL agent?</summary>
-        <ul>
-            <li><strong>Answer:</strong> A value-based agent estimates the value of a state/action and picks the highest-valued option. A policy-based agent directly learns a mapping from states to actions.</li>
-            <li><strong>Analysis:</strong> Value-based methods (like Q-Learning) handle discrete action spaces. Policy-based methods are suited for continuous action spaces. Actor-Critic methods combine both.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">8. An algorithm that estimates how "good" a state or action is, and simply picks the action with the highest estimated value (greedy approach), is classified as:</div>
+        <ol class="options-list">
+            <li>Value Based</li>
+            <li>Policy Based</li>
+            <li>Actor Critic</li>
+            <li>Model Based</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: A</span>
+                <strong>Analysis:</strong> Value-based agents (like Q-Learning) rely on the Value Function (V(s) or Q(s,a)) to dictate behavior, unlike policy-based agents that directly learn a mapping from states to actions.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q9. What does it mean for an RL algorithm to be "Model-Free"?</summary>
-        <ul>
-            <li><strong>Answer:</strong> It treats the environment as a black box and learns optimal behavior purely through trial and error without learning the environment's transition and reward functions.</li>
-            <li><strong>Analysis:</strong> This is compared to model-based methods, where the agent learns or is given the transition function to simulate future trajectories.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">9. What does it mean if an RL agent is "Model-Free"?</div>
+        <ol class="options-list">
+            <li>It uses deep neural networks instead of traditional machine learning models.</li>
+            <li>It calculates the explicit transition function P(s'|s,a) before taking an action.</li>
+            <li>It learns purely through trial and error without trying to learn how the environment works (treats it as a black box).</li>
+            <li>It cannot solve Markov Decision Processes.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: C</span>
+                <strong>Analysis:</strong> A model-free agent doesn't care how the environment works (doesn't learn P or R functions explicitly); it learns the value of actions directly from experience.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q10. What is the fundamental difference between On-Policy and Off-Policy learning?</summary>
-        <ul>
-            <li><strong>Answer:</strong> In on-policy learning, the target policy being optimized is the same as the behavior policy. In off-policy learning, the target policy is different from the behavior policy.</li>
-            <li><strong>Analysis:</strong> Off-policy methods have higher data efficiency because they can use an Experience Replay Buffer to reuse past transitions.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">10. The core definition of an "Off-Policy" learning algorithm is that:</div>
+        <ol class="options-list">
+            <li>It evaluates and improves the exact same policy that is used to make decisions.</li>
+            <li>The Target Policy being optimized is different from the Behavior Policy generating the data.</li>
+            <li>It discards data immediately after a single update.</li>
+            <li>It can only be used with discrete action spaces.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: B</span>
+                <strong>Analysis:</strong> Off-policy algorithms (like Q-learning and DQN) learn from data generated by a different behavior policy or historical data, allowing for high data efficiency via Experience Replay.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q11. What are the key advantages and drawbacks of Q-Learning?</summary>
-        <ul>
-            <li><strong>Answer:</strong> Pros: efficient on-line learning and off-policy learning via exploration. Cons: overestimation bias making the agent overly optimistic.</li>
-            <li><strong>Analysis:</strong> Q-Learning is a foundational value-based, model-free, and off-policy algorithm that updates action-values using the temporal difference formula.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">11. Which of the following is a known disadvantage of Q-Learning?</div>
+        <ol class="options-list">
+            <li>It requires a perfect simulator of the environment.</li>
+            <li>It only works on deterministic environments.</li>
+            <li>It suffers from an overestimation bias and can be too optimistic during training.</li>
+            <li>It is an on-policy algorithm, meaning it has poor sample efficiency.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: C</span>
+                <strong>Analysis:</strong> Because Q-learning uses the maximum Q-value of the next state in its update rule, it is prone to overestimation bias, making it overly optimistic.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q12. In what situations might SARSA be preferred over Q-Learning?</summary>
-        <ul>
-            <li><strong>Answer:</strong> SARSA is preferred in hazardous environments or when dealing with constraints because it learns from the actual path taken.</li>
-            <li><strong>Analysis:</strong> Because SARSA is an on-policy method, it is safer but generally slower to reach an optimal policy than Q-Learning.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">12. SARSA is distinct from Q-Learning in that SARSA is:</div>
+        <ol class="options-list">
+            <li>Model-based</li>
+            <li>Off-policy</li>
+            <li>On-policy</li>
+            <li>Policy-based</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: C</span>
+                <strong>Analysis:</strong> SARSA is a Value-based, Model-free, On-policy algorithm. It learns from the actual path taken by the behavior policy, making it safer in hazardous environments compared to Q-Learning.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q13. How does Deep Q-Network (DQN) solve problems in high-dimensional state spaces?</summary>
-        <ul>
-            <li><strong>Answer:</strong> DQN uses deep neural networks to handle high-dimensional states (like pixels) and breaks data correlation using Experience Replay.</li>
-            <li><strong>Analysis:</strong> While DQN successfully combines deep learning with Q-learning, it remains limited to discrete action spaces and is prone to overestimation bias.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">13. How does Deep Q-Network (DQN) break the temporal correlation of training data to improve learning stability?</div>
+        <ol class="options-list">
+            <li>By using the REINFORCE algorithm.</li>
+            <li>By using an Experience Replay Buffer.</li>
+            <li>By performing Monte Carlo Tree Search.</li>
+            <li>By restricting the state space to low dimensions.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: B</span>
+                <strong>Analysis:</strong> DQN utilizes an Experience Replay Buffer to store (s, a, r, s') tuples and samples them randomly, which breaks the correlation between consecutive experiences and stabilizes training.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q14. Why is Proximal Policy Optimization (PPO) often considered an "industry standard"?</summary>
-        <ul>
-            <li><strong>Answer:</strong> PPO is popular due to its stable and reliable convergence. It prevents destructively large updates by constraining how far the new policy can deviate.</li>
-            <li><strong>Analysis:</strong> PPO is an on-policy, model-free Actor-Critic algorithm. Despite its stability, it suffers from lower sample efficiency compared to off-policy methods.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">14. Proximal Policy Optimization (PPO) is widely used as an industry standard. How is it categorized?</div>
+        <ol class="options-list">
+            <li>Value-based, Model-based, Off-policy</li>
+            <li>Policy-based, Model-free, Off-policy</li>
+            <li>Actor-Critic (Policy-based), Model-free, On-policy</li>
+            <li>Hybrid, Model-based, Planning</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: C</span>
+                <strong>Analysis:</strong> PPO is an Actor-Critic architecture that operates Model-free and On-policy. It constraints the policy update so it does not deviate too far from the one that collected the data.
+            </div>
+        </details>
+    </div>
 
-    <details>
-        <summary>Q15. What are the distinct benefits of Soft Actor-Critic (SAC)?</summary>
-        <ul>
-            <li><strong>Answer:</strong> SAC is highly sample-efficient and utilizes entropy regularization for superior exploration, making it SOTA for continuous control.</li>
-            <li><strong>Analysis:</strong> SAC is a model-free, off-policy, Actor-Critic architecture. It has the drawback of being computationally intensive during training.</li>
-        </ul>
-    </details>
+    <div class="question-container">
+        <div class="question-text">15. Soft Actor-Critic (SAC) achieves state-of-the-art performance for continuous control tasks largely due to:</div>
+        <ol class="options-list">
+            <li>Using look-ahead planning like AlphaZero.</li>
+            <li>Solving a large system of equations dynamically.</li>
+            <li>Using entropy regularization for superior exploration.</li>
+            <li>Discarding samples after a single update for stability.</li>
+        </ol>
+        <details>
+            <summary>Show Answer & Analysis</summary>
+            <div class="answer-box">
+                <span class="correct-answer">Correct Answer: C</span>
+                <strong>Analysis:</strong> SAC is an Actor-Critic, Model-free, Off-policy algorithm that integrates entropy regularization into the reward to encourage the policy to explore as broadly as possible while succeeding at the task.
+            </div>
+        </details>
+    </div>
 
 </body>
 </html>
