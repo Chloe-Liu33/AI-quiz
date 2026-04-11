@@ -3,432 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Learning Knowledge Assessment</title>
+    <title>TA Session 5: Reinforcement Learning Q&A</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --correct-bg: #d4edda;
-            --correct-border: #c3e6cb;
-            --correct-text: #155724;
-            --wrong-bg: #f8d7da;
-            --wrong-border: #f5c6cb;
-            --wrong-text: #721c24;
-            --card-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 40px 20px;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .header h1 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .question-card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
-            border-left: 5px solid #bdc3c7;
-            transition: transform 0.2s;
-        }
-
-        .question-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-
-        .options-container {
-            display: grid;
-            gap: 12px;
-        }
-
-        .option-btn {
-            background: #fff;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px 20px;
-            cursor: pointer;
-            text-align: left;
-            font-size: 1rem;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .option-btn:hover:not(.disabled) {
-            background-color: #f1f3f5;
-            border-color: #ced4da;
-            transform: translateX(5px);
-        }
-
-        .option-letter {
-            font-weight: 800;
-            margin-right: 15px;
-            color: #7f8c8d;
-        }
-
-        /* 状态样式 */
-        .option-btn.correct {
-            background-color: var(--correct-bg) !important;
-            border-color: var(--correct-border) !important;
-            color: var(--correct-text) !important;
-        }
-
-        .option-btn.wrong {
-            background-color: var(--wrong-bg) !important;
-            border-color: var(--wrong-border) !important;
-            color: var(--wrong-text) !important;
-        }
-
-        .option-btn.disabled {
-            pointer-events: none;
-        }
-
-        /* 解析区域 */
-        .explanation-panel {
-            display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #fdfdfe;
-            border-top: 2px dashed #dee2e6;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .explanation-panel h4 {
-            margin-top: 0;
-            color: #495057;
-            font-size: 1.1rem;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .exp-item {
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
-
-        .exp-key {
-            font-weight: bold;
-            color: #2c3e50;
-            display: inline-block;
-            width: 80px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        details { margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; background-color: #fcfcfc; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: background-color 0.3s ease; }
+        details[open] { background-color: #fff; border-color: #3498db; }
+        summary { font-weight: 600; font-size: 1.05em; cursor: pointer; color: #2980b9; outline: none; list-style-position: inside; }
+        summary:hover { color: #1abc9c; }
+        ul { margin-top: 15px; padding-left: 20px; color: #444; }
+        li { margin-bottom: 8px; }
+        strong { color: #2c3e50; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>DL & ML Research Fundamentals</h1>
-        <p>Interactive Assessment for students.</p>
-    </div>
+    <h1>Reinforcement Learning & MDP - Review Questions</h1>
+    <p>Click on any question below to reveal the answer and analysis.</p>
 
-    <div id="quiz-root"></div>
+    <details>
+        <summary>Q1. What is the typical convergence rate of gradient descent on a smooth and strongly convex function?</summary>
+        <ul>
+            <li><strong>Answer:</strong> Linear O(ρ^t).</li>
+            <li><strong>Analysis:</strong> For a function that is both smooth and strongly convex, the gradient cannot be small unless it is already near the optimum, resulting in a linear convergence rate. By contrast, if a function is only convex, the convergence rate is sublinear O(1/t).</li>
+        </ul>
+    </details>
 
-    <script>
-        const quizData = [
-            {
-                id: 1,
-                q: "1. What is the key difference between supervised learning and unsupervised learning?",
-                options: {
-                    A: "Supervised learning optimizes loss functions, whereas unsupervised learning does not",
-                    B: "Supervised learning learns from labels, whereas unsupervised learning does not",
-                    C: "Supervised learning can scale to extremely large data size, whereas unsupervised learning cannot",
-                    D: "Supervised learning uses deep learning, whereas unsupervised learning does."
-                },
-                correct: "B",
-                explanations: {
-                    A: "Incorrect. Many unsupervised methods (like K-means or Autoencoders) minimize objective functions.",
-                    B: "Correct. Labels are the definitive requirement for supervised learning.",
-                    C: "Incorrect. Unsupervised learning often scales better as it doesn't require human annotation.",
-                    D: "Incorrect. Deep learning techniques apply to both types of learning."
-                }
-            },
-            {
-                id: 2,
-                q: "2. Which of the following statements about the K-means algorithm is incorrect?",
-                options: {
-                    A: "K-means algorithm has to know the number of clusters k in advance",
-                    B: "K-means algorithm is for unsupervised learning problems",
-                    C: "K-means algorithm will find globally optimal clusters in the sense of globally minimizing the sum of point-to-center distances",
-                    D: "K-means algorithm provably makes progress at each iteration, until it converges."
-                },
-                correct: "C",
-                explanations: {
-                    A: "True statement. 'k' is a pre-defined hyperparameter.",
-                    B: "True statement. It is a fundamental clustering algorithm.",
-                    C: "Incorrect Statement (Correct Choice). K-means is sensitive to initialization and only guarantees a local minimum.",
-                    D: "True statement. The objective function (Inertia) decreases or stays flat at every step."
-                }
-            },
-            {
-                id: 3,
-                q: "3. Which of the following statements about AI is correct?",
-                options: {
-                    A: "AI is about developing machine learning techniques to solve intelligence problems",
-                    B: "AI is about developing neural networks and deep learning techniques to solve intelligence problems",
-                    C: "AI is about developing computing methods to achieve human-level capabilities and rational behaviors",
-                    D: "AI is about developing techniques to make computers behave exactly as humans."
-                },
-                correct: "C",
-                explanations: {
-                    A: "Incorrect. ML is only a subset of the broader AI field.",
-                    B: "Incorrect. DL is a subset of ML, which is a subset of AI.",
-                    C: "Correct. AI's core goal is creating systems that act and think rationally to solve complex tasks.",
-                    D: "Incorrect. AI focuses on rational efficiency, not necessarily emulating human errors or biological constraints."
-                }
-            },
-            {
-                id: 4,
-                q: "4. Which of the following is incorrect about supervised learning?",
-                options: {
-                    A: "Two major problems of supervised learning are classification and regression",
-                    B: "The success of deep learning begins from supervised learning",
-                    C: "Many supervised learning algorithms are based on minimizing loss functions",
-                    D: "Supervised learning algorithms interact with data samples to identify high-rewarding ones and discard low-rewarding ones, ultimately maximizes overall rewards."
-                },
-                correct: "D",
-                explanations: {
-                    A: "True. These are the two primary pillars of SL.",
-                    B: "True. Benchmarks like ImageNet (SL) catalyzed the DL revolution.",
-                    C: "True. Loss minimization (Gradient Descent) is the standard learning paradigm.",
-                    D: "Incorrect Statement (Correct Choice). This describes Reinforcement Learning (RL), not SL."
-                }
-            },
-            {
-                id: 5,
-                q: "5. Which of the following about relations between linear classifiers and neural networks (NN) is correct?",
-                options: {
-                    A: "They are not related",
-                    B: "Linear classifiers are a special case of NN, with one hidden layer and indicator function as the activation function",
-                    C: "Linear classifiers are a special case of NN, with no hidden layer and indicator function as the activation function",
-                    D: "Linear classifiers are a special case of NN, with no hidden layer and a continuous activation function"
-                },
-                correct: "C",
-                explanations: {
-                    A: "Incorrect. They share the same fundamental linear algebra basis.",
-                    B: "Incorrect. Adding a hidden layer introduces non-linearity (MLP).",
-                    C: "Correct. A single-layer Perceptron with a step function is the textbook definition of a linear classifier.",
-                    D: "Incorrect. Continuous activations (like Sigmoid) turn it into Logistic Regression, often seen as a specific type of linear model."
-                }
-            },
-            {
-                id: 6,
-                q: "6. Which of the following statement about neural networks' activation functions is incorrect?",
-                options: {
-                    A: "They are used to introduce non-linearity to the model",
-                    B: "Popular choices include ReLU and sigmoid function",
-                    C: "They need to be differentiable everywhere",
-                    D: "Choice of activation functions is important to the performance of the network"
-                },
-                correct: "C",
-                explanations: {
-                    A: "True. Non-linearity allows NNs to be universal function approximators.",
-                    B: "True. These are standard choices in modern DL.",
-                    C: "Incorrect Statement (Correct Choice). ReLU is not differentiable at x=0, yet it is extremely successful in practice.",
-                    D: "True. Activation choice affects gradient flow and training speed."
-                }
-            },
-            {
-                id: 7,
-                q: "7. Which of the following function can be provably minimized by the gradient descent method?",
-                options: {
-                    A: "Continuous functions",
-                    B: "Convex functions",
-                    C: "Concave functions",
-                    D: "Quadratic functions"
-                },
-                correct: "B",
-                explanations: {
-                    A: "Incorrect. Continuous non-convex functions can trap GD in poor local minima.",
-                    B: "Correct. In convex optimization, GD is guaranteed to find the global minimum.",
-                    C: "Incorrect. GD would walk away from the peak of a concave function.",
-                    D: "Incorrect. Only positive-definite (convex) quadratic functions are guaranteed."
-                }
-            },
-            {
-                id: 8,
-                q: "8. Which of the following can be computed during the backpropagation algorithm?",
-                options: {
-                    A: "Gradient of the neural network",
-                    B: "Predicted value of the neural network",
-                    C: "Both the gradient and the predicted value of the neural network",
-                    D: "The optimal weights of the neural network"
-                },
-                correct: "A",
-                explanations: {
-                    A: "Correct. Backprop is specifically the efficient computation of gradients using the Chain Rule.",
-                    B: "Incorrect. Predictions happen during the Forward Pass.",
-                    C: "Incorrect. Forward and Backward passes are distinct stages.",
-                    D: "Incorrect. Backprop only provides gradients; the Optimizer (e.g., SGD) updates weights toward the optimal."
-                }
-            },
-            {
-                id: 9,
-                q: "9. Which of the following statement about the depth of a neural network (i.e., the number of hidden layers) is correct?",
-                options: {
-                    A: "The deeper the network is, the better performance we will obtain",
-                    B: "The shallower the network is, the better performance we will obtain",
-                    C: "The only issue for training a very deep neural network is the large computational cost",
-                    D: "The best choice for the depth of a neural network depends on the amount of available training data and gradient calculation algorithm"
-                },
-                correct: "D",
-                explanations: {
-                    A: "Incorrect. Over-depth causes vanishing gradients and overfitting.",
-                    B: "Incorrect. Shallow networks often lack the capacity to learn complex features.",
-                    C: "Incorrect. Optimization stability (gradients) is often a bigger hurdle than compute.",
-                    D: "Correct. Model complexity must be balanced with data volume and optimization strategy."
-                }
-            },
-            {
-                id: 10,
-                q: "10. Which of the following is not a major research challenges in deep learning?",
-                options: {
-                    A: "Optimizing loss function",
-                    B: "Designing neural networks' architecture",
-                    C: "Make predictions from learned neural networks",
-                    D: "All of the above are very challenging"
-                },
-                correct: "C",
-                explanations: {
-                    A: "Challenge. Researching optimizers (Adam, Lion, etc.) is a huge subfield.",
-                    B: "Challenge. Architecture design (Transformers, GNNs) is the heart of DL progress.",
-                    C: "Correct Choice. Inference is a deterministic forward pass; while engineering it for speed is hard, it is not a fundamental scientific challenge.",
-                    D: "Incorrect, because C is not a research hurdle."
-                }
-            },
-            {
-                id: 11,
-                q: "11. Which of the following is a drawback of linear classifiers?",
-                options: {
-                    A: "Lack of robustness",
-                    B: "Have limited expressiveness",
-                    C: "Difficult to learn the optimal classifier",
-                    D: "None of the above is an issue for linear classifiers"
-                },
-                correct: "B",
-                explanations: {
-                    A: "Incorrect. Linear models are often very robust due to their simplicity.",
-                    B: "Correct. They cannot learn non-linear decision boundaries (e.g., the XOR problem).",
-                    C: "Incorrect. Most linear model optimization is convex and easily solved.",
-                    D: "Incorrect, as 'B' is a significant limitation."
-                }
-            },
-            {
-                id: 12,
-                q: "12. Why is gradient descent commonly used in training neural networks?",
-                options: {
-                    A: "It guarantees finding the global minimum in all cases",
-                    B: "It simplifies the network architecture",
-                    C: "It provides an efficient iterative method to minimize the loss function",
-                    D: "It avoids the need for activation functions"
-                },
-                correct: "C",
-                explanations: {
-                    A: "Incorrect. It only guarantees local minima in non-convex DL landscapes.",
-                    B: "Incorrect. It optimizes weights, not layer structures.",
-                    C: "Correct. It is the most scalable way to update millions of weights using partial derivatives.",
-                    D: "Incorrect. Activations are essential for the network to be non-linear."
-                }
-            },
-            {
-                id: 13,
-                q: "13. Which of the following problems might arise if the learning rate is set too high?",
-                options: {
-                    A: "Slow convergence",
-                    B: "Overfitting",
-                    C: "The loss may oscillate or diverge",
-                    D: "Underfitting"
-                },
-                correct: "C",
-                explanations: {
-                    A: "Incorrect. Slow convergence results from a learning rate that is too *low*.",
-                    B: "Incorrect. Overfitting is related to capacity and regularization.",
-                    C: "Correct. Overshooting the minimum leads to instability, oscillation, or exploding loss.",
-                    D: "Incorrect. While it won't learn, 'Divergence' is the specific term for this failure mode."
-                }
-            }
-        ];
+    <details>
+        <summary>Q2. How is the "Markov Property" formally defined in the context of Reinforcement Learning?</summary>
+        <ul>
+            <li><strong>Answer:</strong> A state S_t is Markov if and only if P[S_{t+1}|S_t] = P[S_{t+1}|S_1,..,S_t].</li>
+            <li><strong>Analysis:</strong> The Markov Property dictates that "the future is independent of the past given the present". Because the state captures all relevant information from the history, it acts as a sufficient statistic of the future.</li>
+        </ul>
+    </details>
 
-        function renderQuiz() {
-            const root = document.getElementById('quiz-root');
-            quizData.forEach((data, index) => {
-                const card = document.createElement('div');
-                card.className = 'question-card';
-                card.innerHTML = `
-                    <div class="question-text">${data.q}</div>
-                    <div class="options-container" id="opts-${data.id}"></div>
-                    <div class="explanation-panel" id="exp-panel-${data.id}">
-                        <h4>Option Explanations:</h4>
-                        <div id="exp-content-${data.id}"></div>
-                    </div>
-                `;
-                root.appendChild(card);
+    <details>
+        <summary>Q3. What is the fundamental assumption about goals in Reinforcement Learning, known as the "Reward Hypothesis"?</summary>
+        <ul>
+            <li><strong>Answer:</strong> All goals can be described by the maximization of expected cumulative reward.</li>
+            <li><strong>Analysis:</strong> In the RL framework, the agent receives a scalar feedback signal called a reward. The agent's overarching job is to select actions to maximize the total future cumulative reward.</li>
+        </ul>
+    </details>
 
-                const optContainer = document.getElementById(`opts-${data.id}`);
-                const expContent = document.getElementById(`exp-content-${data.id}`);
-                const expPanel = document.getElementById(`exp-panel-${data.id}`);
+    <details>
+        <summary>Q4. What is the difference between a Fully Observable Environment and a Partially Observable Environment (POMDP)?</summary>
+        <ul>
+            <li><strong>Answer:</strong> In full observability, the agent directly observes the environment state. In partial observability, the agent only indirectly observes the environment and must construct its own state representation.</li>
+            <li><strong>Analysis:</strong> In a fully observable MDP, the agent state equals the environment state. In a POMDP, the agent might use a complete history or a recurrent neural network to construct its state representation.</li>
+        </ul>
+    </details>
 
-                Object.entries(data.options).forEach(([key, text]) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'option-btn';
-                    btn.innerHTML = `<span class="option-letter">${key}.</span> <span>${text}</span>`;
-                    
-                    btn.onclick = () => {
-                        handleAnswer(data.id, key, data.correct);
-                    };
-                    optContainer.appendChild(btn);
+    <details>
+        <summary>Q5. What are the three major components that might make up a Reinforcement Learning agent?</summary>
+        <ul>
+            <li><strong>Answer:</strong> A Policy, a Value Function, and a Model.</li>
+            <li><strong>Analysis:</strong> The policy is the agent's behavior function mapping states to actions. The value function evaluates how good a specific state or action is. The model is the agent's internal representation of the environment.</li>
+        </ul>
+    </details>
 
-                    // Pre-fill explanation content
-                    const expItem = document.createElement('div');
-                    expItem.className = 'exp-item';
-                    expItem.innerHTML = `<span class="exp-key">Option ${key}:</span> ${data.explanations[key]}`;
-                    expContent.appendChild(expItem);
-                });
-            });
-        }
+    <details>
+        <summary>Q6. How does Reinforcement Learning fundamentally differ from Planning?</summary>
+        <ul>
+            <li><strong>Answer:</strong> In RL, the environment is initially unknown, and the agent learns via interaction. In Planning, a perfect model of the environment is known, and the agent computes its policy internally.</li>
+            <li><strong>Analysis:</strong> Planning is akin to deliberation or search, where an agent can query an internal emulator. RL requires interactive trial-and-error gameplay.</li>
+        </ul>
+    </details>
 
-        function handleAnswer(qId, selectedKey, correctKey) {
-            const container = document.getElementById(`opts-${qId}`);
-            const buttons = container.getElementsByClassName('option-btn');
-            const panel = document.getElementById(`exp-panel-${qId}`);
+    <details>
+        <summary>Q7. Why must an agent balance Exploration and Exploitation?</summary>
+        <ul>
+            <li><strong>Answer:</strong> Exploration discovers more information about the environment, while exploitation leverages known information to maximize immediate rewards.</li>
+            <li><strong>Analysis:</strong> Over-exploiting might leave the agent stuck in a suboptimal strategy. Both are necessary to find the best long-term strategy.</li>
+        </ul>
+    </details>
 
-            Array.from(buttons).forEach(btn => {
-                btn.classList.add('disabled');
-                const btnKey = btn.querySelector('.option-letter').innerText.replace('.', '');
-                
-                if (btnKey === correctKey) {
-                    btn.classList.add('correct');
-                } else if (btnKey === selectedKey) {
-                    btn.classList.add('wrong');
-                }
-            });
+    <details>
+        <summary>Q8. How does a Value-Based RL agent differ from a Policy-Based RL agent?</summary>
+        <ul>
+            <li><strong>Answer:</strong> A value-based agent estimates the value of a state/action and picks the highest-valued option. A policy-based agent directly learns a mapping from states to actions.</li>
+            <li><strong>Analysis:</strong> Value-based methods (like Q-Learning) handle discrete action spaces. Policy-based methods are suited for continuous action spaces. Actor-Critic methods combine both.</li>
+        </ul>
+    </details>
 
-            panel.style.display = 'block';
-        }
+    <details>
+        <summary>Q9. What does it mean for an RL algorithm to be "Model-Free"?</summary>
+        <ul>
+            <li><strong>Answer:</strong> It treats the environment as a black box and learns optimal behavior purely through trial and error without learning the environment's transition and reward functions.</li>
+            <li><strong>Analysis:</strong> This is compared to model-based methods, where the agent learns or is given the transition function to simulate future trajectories.</li>
+        </ul>
+    </details>
 
-        renderQuiz();
-    </script>
+    <details>
+        <summary>Q10. What is the fundamental difference between On-Policy and Off-Policy learning?</summary>
+        <ul>
+            <li><strong>Answer:</strong> In on-policy learning, the target policy being optimized is the same as the behavior policy. In off-policy learning, the target policy is different from the behavior policy.</li>
+            <li><strong>Analysis:</strong> Off-policy methods have higher data efficiency because they can use an Experience Replay Buffer to reuse past transitions.</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>Q11. What are the key advantages and drawbacks of Q-Learning?</summary>
+        <ul>
+            <li><strong>Answer:</strong> Pros: efficient on-line learning and off-policy learning via exploration. Cons: overestimation bias making the agent overly optimistic.</li>
+            <li><strong>Analysis:</strong> Q-Learning is a foundational value-based, model-free, and off-policy algorithm that updates action-values using the temporal difference formula.</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>Q12. In what situations might SARSA be preferred over Q-Learning?</summary>
+        <ul>
+            <li><strong>Answer:</strong> SARSA is preferred in hazardous environments or when dealing with constraints because it learns from the actual path taken.</li>
+            <li><strong>Analysis:</strong> Because SARSA is an on-policy method, it is safer but generally slower to reach an optimal policy than Q-Learning.</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>Q13. How does Deep Q-Network (DQN) solve problems in high-dimensional state spaces?</summary>
+        <ul>
+            <li><strong>Answer:</strong> DQN uses deep neural networks to handle high-dimensional states (like pixels) and breaks data correlation using Experience Replay.</li>
+            <li><strong>Analysis:</strong> While DQN successfully combines deep learning with Q-learning, it remains limited to discrete action spaces and is prone to overestimation bias.</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>Q14. Why is Proximal Policy Optimization (PPO) often considered an "industry standard"?</summary>
+        <ul>
+            <li><strong>Answer:</strong> PPO is popular due to its stable and reliable convergence. It prevents destructively large updates by constraining how far the new policy can deviate.</li>
+            <li><strong>Analysis:</strong> PPO is an on-policy, model-free Actor-Critic algorithm. Despite its stability, it suffers from lower sample efficiency compared to off-policy methods.</li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>Q15. What are the distinct benefits of Soft Actor-Critic (SAC)?</summary>
+        <ul>
+            <li><strong>Answer:</strong> SAC is highly sample-efficient and utilizes entropy regularization for superior exploration, making it SOTA for continuous control.</li>
+            <li><strong>Analysis:</strong> SAC is a model-free, off-policy, Actor-Critic architecture. It has the drawback of being computationally intensive during training.</li>
+        </ul>
+    </details>
+
 </body>
 </html>
