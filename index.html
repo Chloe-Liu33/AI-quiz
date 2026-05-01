@@ -3,280 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TA Session 5: RL Multiple Choice Quiz</title>
+    <title>LLMs, RL, and Reasoning - Interactive Quiz</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; background-color: #f9f9f9;}
-        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        .question-container { background-color: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; color: #2c3e50; }
-        .options-list { list-style-type: upper-alpha; margin-bottom: 15px; padding-left: 20px; }
-        .options-list li { margin-bottom: 8px; }
-        details { background-color: #f0f7fb; border-left: 4px solid #3498db; padding: 10px 15px; border-radius: 4px; transition: background-color 0.3s ease; }
-        summary { font-weight: 600; cursor: pointer; color: #2980b9; outline: none; }
-        summary:hover { color: #1abc9c; }
-        .answer-box { margin-top: 10px; color: #444; }
-        .correct-answer { font-weight: bold; color: #27ae60; margin-bottom: 5px; display: block;}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #111827;
+            margin-bottom: 30px;
+        }
+        .question-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .question-text {
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .option {
+            background-color: #e5e7eb;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .option:hover {
+            background-color: #d1d5db;
+        }
+        .option.correct {
+            background-color: #dcfce7;
+            border-color: #22c55e;
+            color: #166534;
+        }
+        .option.incorrect {
+            background-color: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+        .option.disabled {
+            pointer-events: none;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            border-radius: 0 6px 6px 0;
+            color: #1e3a8a;
+            font-size: 0.95em;
+        }
+        .explanation strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #1d4ed8;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Reinforcement Learning & MDP - Multiple Choice Quiz</h1>
-    <p>Test your knowledge based on TA Session 5. Read the question, choose your answer, and click "Show Answer & Analysis" to check.</p>
+    <h1>LLMs, RL, and Reasoning Quiz</h1>
+    <div id="quiz-container"></div>
 
-    <div class="question-container">
-        <div class="question-text">1. What is the typical convergence rate of gradient descent on a smooth and strongly convex function?</div>
-        <ol class="options-list">
-            <li>Sublinear O(1/t)</li>
-            <li>Linear O(ρ^t)</li>
-            <li>Faster Sublinear O(1/t²)</li>
-            <li>Quadratic O(ρ^2t)</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: B</span>
-                <strong>Analysis:</strong> For a function that is both smooth and strongly convex, gradient descent converges linearly. Sublinear O(1/t) applies to functions that are only convex.
-            </div>
-        </details>
-    </div>
+    <script>
+        const quizData = [
+            {
+                question: "1. What is the fundamental mechanism of an LLM during the pre-training step?",
+                options: [
+                    "Filtering out non-sense data automatically",
+                    "Predicting the previous token in a sequence",
+                    "Predicting the next token in an auto-regressive way",
+                    "Summarizing entire text paragraphs simultaneously"
+                ],
+                correctAnswer: 2,
+                explanation: "Abstractly, LLMs model conditional probabilities to predict the next token in an auto-regressive way based on supervised learning over massive text data."
+            },
+            {
+                question: "2. Which of the following is considered a primary limitation of simply pre-training an LLM?",
+                options: [
+                    "They cannot generate any text without human intervention",
+                    "They are inherently bad at reasoning tasks and require careful prompt engineering",
+                    "They memorize text exactly and cannot create novel sentences",
+                    "They operate too slowly to be used in real-time applications"
+                ],
+                correctAnswer: 1,
+                explanation: "The lecture highlights that base pre-trained LLMs need carefully written prompts to trigger desired predictions and struggle with reasoning tasks, even simple ones."
+            },
+            {
+                question: "3. What are the two key components of Alpaca's training pipeline?",
+                options: [
+                    "A strong pre-trained model + high-quality instruction-following data",
+                    "A small neural network + massive amounts of unlabelled data",
+                    "Tree of Thought search + human preference voting",
+                    "Retrieval Augmented Generation + custom tokenizers"
+                ],
+                correctAnswer: 0,
+                explanation: "Alpaca utilizes a strong pre-trained model (like GPT-3.5) combined with high-quality instruction-following data to improve capabilities."
+            },
+            {
+                question: "4. What is the main idea behind the 'Tree of Thought & RL' approach?",
+                options: [
+                    "Mapping out sentence structures into syntax trees",
+                    "Generating different possible outputs and learning a score/reward for each thought",
+                    "Grouping similar words into a tree-like database",
+                    "Storing past conversations in a hierarchical file system"
+                ],
+                correctAnswer: 1,
+                explanation: "It involves using LLMs to generate various possible outputs (thoughts) and then learning a score or 'reward' to adjust the output probability of each thought (e.g., in Creative Writing or Game 24)."
+            },
+            {
+                question: "5. What does RAG stand for in the context of LLM inference?",
+                options: [
+                    "Recurrent Attention Generation",
+                    "Reasoning Algorithmic Graphs",
+                    "Retrieval Augmented Generation",
+                    "Reinforcement AI Guidance"
+                ],
+                correctAnswer: 2,
+                explanation: "RAG stands for Retrieval Augmented Generation, which supplements existing LLMs with fresh, retrieved data at inference time."
+            },
+            {
+                question: "6. Which of the following is a core challenge of implementing RAG?",
+                options: [
+                    "Preventing the LLM from speaking in different languages",
+                    "Building efficient data index/retrieval systems and attributing answers to correct references",
+                    "Training the model on billions of new parameters daily",
+                    "Converting text into audio format"
+                ],
+                correctAnswer: 1,
+                explanation: "The lecture explicitly lists building efficient data index/retrieval systems, ensuring answer accuracy, and attributing to the correct reference as core challenges for RAG."
+            },
+            {
+                question: "7. In the context of the lecture, what is another common term used for 'In-context Learning'?",
+                options: [
+                    "Zero-shot or one-shot learning",
+                    "Fine-tuning",
+                    "Unsupervised pre-training",
+                    "Backpropagation"
+                ],
+                correctAnswer: 0,
+                explanation: "In-context learning is also called 0-shot or 1-shot learning, meaning the model learns with a single sample (or no samples) provided directly in the prompt."
+            },
+            {
+                question: "8. How does the lecture fundamentally describe In-context Learning?",
+                options: [
+                    "It is essentially clever prompt engineering",
+                    "It is a new hardware architecture for GPUs",
+                    "It is a way to permanently alter the model's weights",
+                    "It is a method to reduce the model's energy consumption"
+                ],
+                correctAnswer: 0,
+                explanation: "The presentation explicitly states that In-context learning is 'essentially clever prompt engineering'."
+            },
+            {
+                question: "9. When is Retrieval Augmented Generation (RAG) particularly useful?",
+                options: [
+                    "When the LLM needs to draw images",
+                    "When you want to train an LLM from scratch",
+                    "When your LLM's training data did not contain information about the specific query",
+                    "When you want to reduce the context window size"
+                ],
+                correctAnswer: 2,
+                explanation: "RAG is highly useful when the base model lacks knowledge about recent events or specific queries, as it pulls in fresh external data."
+            },
+            {
+                question: "10. Based on the lecture's Q&A math example (e.g., Q: 1+2 A: -1), does an LLM truly learn the underlying reasoning task?",
+                options: [
+                    "Yes, it permanently understands mathematical rules after one example",
+                    "No, it cannot do math under any circumstances",
+                    "It depends; it often just relies on the specific patterns demonstrated in the prompt",
+                    "Yes, but only if the math involves calculus"
+                ],
+                correctAnswer: 2,
+                explanation: "The lecture poses 'Does LLMs Truly Learn the Task? It depends…' showcasing how providing arbitrary examples changes the LLM's output based on pattern matching rather than true, rigid mathematical reasoning."
+            }
+        ];
 
-    <div class="question-container">
-        <div class="question-text">2. According to the definition of a Markov State, a state S_t is considered Markov if and only if:</div>
-        <ol class="options-list">
-            <li>It contains the complete history of all past actions and observations.</li>
-            <li>The environment is fully deterministic.</li>
-            <li>The future is independent of the past given the present.</li>
-            <li>The agent knows the exact absolute location of all objects.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: C</span>
-                <strong>Analysis:</strong> The core of the Markov property is that P[S_{t+1}|S_t] = P[S_{t+1}|S_1,..,S_t]. Once the current state is known, the history may be thrown away because the state is a sufficient statistic of the future.
-            </div>
-        </details>
-    </div>
+        const quizContainer = document.getElementById('quiz-container');
 
-    <div class="question-container">
-        <div class="question-text">3. What does the "Reward Hypothesis" state in Reinforcement Learning?</div>
-        <ol class="options-list">
-            <li>Rewards must always be immediate to be effective.</li>
-            <li>All goals can be described by the maximization of expected cumulative reward.</li>
-            <li>Agents must balance positive and negative rewards equally.</li>
-            <li>A reward is only given when a task is fully completed.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: B</span>
-                <strong>Analysis:</strong> The Reward Hypothesis posits that any goal-directed behavior can be formalized as the maximization of the sum of a scalar feedback signal (expected cumulative reward).
-            </div>
-        </details>
-    </div>
+        quizData.forEach((item, index) => {
+            // Create Card
+            const card = document.createElement('div');
+            card.className = 'question-card';
 
-    <div class="question-container">
-        <div class="question-text">4. In a Partially Observable Markov Decision Process (POMDP), the agent state is:</div>
-        <ol class="options-list">
-            <li>Exactly equal to the environment state.</li>
-            <li>Constructed by the agent (e.g., using complete history or RNNs) because the environment is indirectly observed.</li>
-            <li>Always fixed and cannot be updated.</li>
-            <li>Irrelevant to calculating the expected reward.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: B</span>
-                <strong>Analysis:</strong> In partial observability (like a poker playing agent only seeing public cards), the agent state ≠ environment state. The agent must construct its own state representation using history, beliefs, or neural networks.
-            </div>
-        </details>
-    </div>
+            // Create Question
+            const questionText = document.createElement('div');
+            questionText.className = 'question-text';
+            questionText.innerText = item.question;
+            card.appendChild(questionText);
 
-    <div class="question-container">
-        <div class="question-text">5. Which of the following is NOT one of the major components typically found inside an RL Agent?</div>
-        <ol class="options-list">
-            <li>Policy</li>
-            <li>Value Function</li>
-            <li>Model</li>
-            <li>Supervised Labels</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: D</span>
-                <strong>Analysis:</strong> An RL agent may include a Policy (behavior function), a Value Function (how good a state/action is), and a Model (agent's representation of the environment). Supervised labels belong to Supervised Learning, not RL.
-            </div>
-        </details>
-    </div>
+            // Create Options List
+            const optionsList = document.createElement('ul');
+            optionsList.className = 'options';
 
-    <div class="question-container">
-        <div class="question-text">6. The fundamental difference between "Reinforcement Learning" and "Planning" is that in Planning:</div>
-        <ol class="options-list">
-            <li>The agent must learn directly from interactive game-play.</li>
-            <li>The rules of the game are completely unknown.</li>
-            <li>A perfect model of the environment is already known to the agent.</li>
-            <li>The agent focuses exclusively on exploration rather than exploitation.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: C</span>
-                <strong>Analysis:</strong> In Planning, a model is known, and the agent performs computations (deliberation, tree search) with its model without external interaction. In RL, the environment is initially unknown and requires interaction.
-            </div>
-        </details>
-    </div>
+            // Create Explanation Box
+            const explanationBox = document.createElement('div');
+            explanationBox.className = 'explanation';
+            explanationBox.innerHTML = `<strong>Explanation:</strong> ${item.explanation}`;
 
-    <div class="question-container">
-        <div class="question-text">7. In the context of RL trade-offs, trying a new restaurant instead of going to your favorite place is an example of:</div>
-        <ol class="options-list">
-            <li>Exploitation</li>
-            <li>Exploration</li>
-            <li>Temporal Difference Learning</li>
-            <li>Dynamic Programming</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: B</span>
-                <strong>Analysis:</strong> Exploration finds more information about the environment by trying new actions, whereas exploitation exploits known information to maximize immediate reward (going to the known favorite).
-            </div>
-        </details>
-    </div>
+            item.options.forEach((optText, optIndex) => {
+                const optionItem = document.createElement('li');
+                optionItem.className = 'option';
+                optionItem.innerText = optText;
 
-    <div class="question-container">
-        <div class="question-text">8. An algorithm that estimates how "good" a state or action is, and simply picks the action with the highest estimated value (greedy approach), is classified as:</div>
-        <ol class="options-list">
-            <li>Value Based</li>
-            <li>Policy Based</li>
-            <li>Actor Critic</li>
-            <li>Model Based</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: A</span>
-                <strong>Analysis:</strong> Value-based agents (like Q-Learning) rely on the Value Function (V(s) or Q(s,a)) to dictate behavior, unlike policy-based agents that directly learn a mapping from states to actions.
-            </div>
-        </details>
-    </div>
+                optionItem.addEventListener('click', function() {
+                    // Disable all options in this question once clicked
+                    const allOptions = optionsList.querySelectorAll('.option');
+                    allOptions.forEach(opt => opt.classList.add('disabled'));
 
-    <div class="question-container">
-        <div class="question-text">9. What does it mean if an RL agent is "Model-Free"?</div>
-        <ol class="options-list">
-            <li>It uses deep neural networks instead of traditional machine learning models.</li>
-            <li>It calculates the explicit transition function P(s'|s,a) before taking an action.</li>
-            <li>It learns purely through trial and error without trying to learn how the environment works (treats it as a black box).</li>
-            <li>It cannot solve Markov Decision Processes.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: C</span>
-                <strong>Analysis:</strong> A model-free agent doesn't care how the environment works (doesn't learn P or R functions explicitly); it learns the value of actions directly from experience.
-            </div>
-        </details>
-    </div>
+                    // Check if correct
+                    if (optIndex === item.correctAnswer) {
+                        this.classList.add('correct');
+                    } else {
+                        this.classList.add('incorrect');
+                        // Highlight the correct answer as well
+                        allOptions[item.correctAnswer].classList.add('correct');
+                    }
 
-    <div class="question-container">
-        <div class="question-text">10. The core definition of an "Off-Policy" learning algorithm is that:</div>
-        <ol class="options-list">
-            <li>It evaluates and improves the exact same policy that is used to make decisions.</li>
-            <li>The Target Policy being optimized is different from the Behavior Policy generating the data.</li>
-            <li>It discards data immediately after a single update.</li>
-            <li>It can only be used with discrete action spaces.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: B</span>
-                <strong>Analysis:</strong> Off-policy algorithms (like Q-learning and DQN) learn from data generated by a different behavior policy or historical data, allowing for high data efficiency via Experience Replay.
-            </div>
-        </details>
-    </div>
+                    // Show explanation
+                    explanationBox.style.display = 'block';
+                });
 
-    <div class="question-container">
-        <div class="question-text">11. Which of the following is a known disadvantage of Q-Learning?</div>
-        <ol class="options-list">
-            <li>It requires a perfect simulator of the environment.</li>
-            <li>It only works on deterministic environments.</li>
-            <li>It suffers from an overestimation bias and can be too optimistic during training.</li>
-            <li>It is an on-policy algorithm, meaning it has poor sample efficiency.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: C</span>
-                <strong>Analysis:</strong> Because Q-learning uses the maximum Q-value of the next state in its update rule, it is prone to overestimation bias, making it overly optimistic.
-            </div>
-        </details>
-    </div>
+                optionsList.appendChild(optionItem);
+            });
 
-    <div class="question-container">
-        <div class="question-text">12. SARSA is distinct from Q-Learning in that SARSA is:</div>
-        <ol class="options-list">
-            <li>Model-based</li>
-            <li>Off-policy</li>
-            <li>On-policy</li>
-            <li>Policy-based</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: C</span>
-                <strong>Analysis:</strong> SARSA is a Value-based, Model-free, On-policy algorithm. It learns from the actual path taken by the behavior policy, making it safer in hazardous environments compared to Q-Learning.
-            </div>
-        </details>
-    </div>
-
-    <div class="question-container">
-        <div class="question-text">13. How does Deep Q-Network (DQN) break the temporal correlation of training data to improve learning stability?</div>
-        <ol class="options-list">
-            <li>By using the REINFORCE algorithm.</li>
-            <li>By using an Experience Replay Buffer.</li>
-            <li>By performing Monte Carlo Tree Search.</li>
-            <li>By restricting the state space to low dimensions.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: B</span>
-                <strong>Analysis:</strong> DQN utilizes an Experience Replay Buffer to store (s, a, r, s') tuples and samples them randomly, which breaks the correlation between consecutive experiences and stabilizes training.
-            </div>
-        </details>
-    </div>
-
-    <div class="question-container">
-        <div class="question-text">14. Proximal Policy Optimization (PPO) is widely used as an industry standard. How is it categorized?</div>
-        <ol class="options-list">
-            <li>Value-based, Model-based, Off-policy</li>
-            <li>Policy-based, Model-free, Off-policy</li>
-            <li>Actor-Critic (Policy-based), Model-free, On-policy</li>
-            <li>Hybrid, Model-based, Planning</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: C</span>
-                <strong>Analysis:</strong> PPO is an Actor-Critic architecture that operates Model-free and On-policy. It constraints the policy update so it does not deviate too far from the one that collected the data.
-            </div>
-        </details>
-    </div>
-
-    <div class="question-container">
-        <div class="question-text">15. Soft Actor-Critic (SAC) achieves state-of-the-art performance for continuous control tasks largely due to:</div>
-        <ol class="options-list">
-            <li>Using look-ahead planning like AlphaZero.</li>
-            <li>Solving a large system of equations dynamically.</li>
-            <li>Using entropy regularization for superior exploration.</li>
-            <li>Discarding samples after a single update for stability.</li>
-        </ol>
-        <details>
-            <summary>Show Answer & Analysis</summary>
-            <div class="answer-box">
-                <span class="correct-answer">Correct Answer: C</span>
-                <strong>Analysis:</strong> SAC is an Actor-Critic, Model-free, Off-policy algorithm that integrates entropy regularization into the reward to encourage the policy to explore as broadly as possible while succeeding at the task.
-            </div>
-        </details>
-    </div>
-
+            card.appendChild(optionsList);
+            card.appendChild(explanationBox);
+            quizContainer.appendChild(card);
+        });
+    </script>
 </body>
 </html>
